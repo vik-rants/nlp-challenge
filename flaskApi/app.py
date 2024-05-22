@@ -23,6 +23,8 @@ def predict():
 
 def data_validation(df):
      # some logic
+     if df.empty:
+         print("The csv is empty")
      return df
 
 if __name__ == '__main__':

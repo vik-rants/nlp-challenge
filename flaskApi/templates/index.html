@@ -1,21 +1,71 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload Form</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-  <form id="inputForm" style="text-align: center;">
+    #inputForm {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 300px;
+    }
+
+    #inputForm input[type="file"] {
+      display: block;
+      margin: 10px auto;
+    }
+
+    #inputForm button {
+      background-color: #17a2b8;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    #inputForm button:hover {
+      background-color: #138496;
+    }
+
+    .row {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <form id="inputForm">
     <input type="file" name="file">
-        <div>
-          <button type="button" class="btn btn-info" onclick="getResult()" value="submit"
-            style="cursor: pointer;">Submit</button>
-        </div>
+    <div>
+      <button type="button" class="btn btn-info" onclick="getResult()" value="submit">Submit</button>
+    </div>
   </form>
 
   <div class="row" id="result">
-    
   </div>
 
-<script>
-  function getResult() {
-    var form_data = new FormData($('#inputForm')[0]);
-    $.ajax({
+  <script>
+    function getResult() {
+      var form_data = new FormData($('#inputForm')[0]);
+      $.ajax({
         type: 'POST',
         url: '/predict',
         data: form_data,
@@ -23,8 +73,10 @@
         cache: false,
         processData: false,
         success: function(data) {
-            $("#result").html(data);       
+          $("#result").html(data);       
         },
-    });
-}
-</script>
+      });
+    }
+  </script>
+</body>
+</html>
