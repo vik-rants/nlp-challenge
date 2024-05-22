@@ -16,7 +16,7 @@ def predict():
     with open("../data/external/model.pkl", 'rb') as file:
             classifier = joblib.load(file)
     #xgb_clf = joblib.load('xgb_clf.pkl')
-    predictions_test = classifier.predict(df)
+    predictions_test = classifier.predict(df['cleaned_review'].values.astype('U'))
 
     df['Predicted Sentiment'] = predictions_test
     return df.to_json(orient="split")
